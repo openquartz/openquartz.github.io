@@ -1,0 +1,257 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 头部样式 */
+header {
+    background-color: #24292e;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* 搜索区域样式 */
+.search-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.search-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.search-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.search-container p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.search-box {
+    display: flex;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+#search-input {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+#search-button {
+    background-color: #0366d6;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-button:hover {
+    background-color: #0256b9;
+}
+
+/* 项目区域样式 */
+.projects-section {
+    padding: 60px 0;
+}
+
+.projects-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #24292e;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.project-content {
+    padding: 20px;
+}
+
+.project-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #24292e;
+}
+
+.project-description {
+    color: #586069;
+    margin-bottom: 15px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #586069;
+    font-size: 0.9rem;
+    border-top: 1px solid #eaecef;
+    padding-top: 15px;
+}
+
+.project-stats {
+    display: flex;
+}
+
+.project-stat {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.project-stat i {
+    margin-right: 5px;
+}
+
+.project-language {
+    display: flex;
+    align-items: center;
+}
+
+.language-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.java-color {
+    background-color: #b07219;
+}
+
+/* 底部样式 */
+footer {
+    background-color: #24292e;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: white;
+    margin: 0 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .search-section {
+        padding: 50px 0;
+    }
+    
+    .search-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .search-container p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    #search-input {
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    
+    #search-button {
+        border-radius: 4px;
+        padding: 10px;
+    }
+}
+
+/* 无结果提示 */
+.no-results {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1.2rem;
+    color: #586069;
+    grid-column: 1 / -1;
+}

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#0d1117"/>
+  
+  <!-- 网格图案 -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#30363d" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  
+  <!-- 装饰圆点 -->
+  <g fill="#58a6ff" opacity="0.6">
+    <circle cx="200" cy="200" r="5"/>
+    <circle cx="500" cy="400" r="7"/>
+    <circle cx="800" cy="200" r="4"/>
+    <circle cx="1100" cy="500" r="6"/>
+    <circle cx="1400" cy="300" r="5"/>
+    <circle cx="1700" cy="600" r="7"/>
+    <circle cx="300" cy="700" r="6"/>
+    <circle cx="600" cy="900" r="4"/>
+    <circle cx="900" cy="700" r="7"/>
+    <circle cx="1200" cy="800" r="5"/>
+    <circle cx="1500" cy="900" r="6"/>
+    <circle cx="1800" cy="700" r="4"/>
+  </g>
+  
+  <!-- 连接线 -->
+  <g stroke="#58a6ff" stroke-width="1" opacity="0.3">
+    <line x1="200" y1="200" x2="500" y2="400"/>
+    <line x1="500" y1="400" x2="800" y2="200"/>
+    <line x1="800" y1="200" x2="1100" y2="500"/>
+    <line x1="1100" y1="500" x2="1400" y2="300"/>
+    <line x1="1400" y1="300" x2="1700" y2="600"/>
+    <line x1="300" y1="700" x2="600" y2="900"/>
+    <line x1="600" y1="900" x2="900" y2="700"/>
+    <line x1="900" y1="700" x2="1200" y2="800"/>
+    <line x1="1200" y1="800" x2="1500" y2="900"/>
+    <line x1="1500" y1="900" x2="1800" y2="700"/>
+    <line x1="200" y1="200" x2="300" y2="700"/>
+    <line x1="500" y1="400" x2="600" y2="900"/>
+    <line x1="800" y1="200" x2="900" y2="700"/>
+    <line x1="1100" y1="500" x2="1200" y2="800"/>
+    <line x1="1400" y1="300" x2="1500" y2="900"/>
+    <line x1="1700" y1="600" x2="1800" y2="700"/>
+  </g>
+  
+  <!-- 代码符号装饰 -->
+  <g fill="#ffffff" opacity="0.1" font-family="monospace" font-size="20">
+    <text x="250" y="250">{}</text>
+    <text x="550" y="450">[]</text>
+    <text x="850" y="250">()</text>
+    <text x="1150" y="550">&lt;&gt;</text>
+    <text x="1450" y="350">;</text>
+    <text x="1750" y="650">=</text>
+    <text x="350" y="750">==</text>
+    <text x="650" y="950">!=</text>
+    <text x="950" y="750">+=</text>
+    <text x="1250" y="850">-=</text>
+    <text x="1550" y="950">*=</text>
+    <text x="1850" y="750">/=</text>
+  </g>
+</svg>

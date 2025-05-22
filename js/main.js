@@ -3,6 +3,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectsContainer = document.getElementById('projects-container');
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+    const languageToggle = document.querySelector('.language-toggle');
+    const languageSelector = document.querySelector('.language-selector');
+    const languageOptions = document.querySelectorAll('.language-dropdown a');
+
+    // 语言翻译
+    const translations = {
+        'zh': {
+            'subtitle': '高质量Java开源项目集合',
+            'explore': '探索优秀的Java开源项目',
+            'description': 'OpenQuartz提供简洁、高效、可靠的Java开源解决方案',
+            'searchPlaceholder': '搜索项目...',
+            'projectList': '项目列表',
+            'copyright': '© 2023 OpenQuartz. 所有项目基于各自的开源协议。',
+            'noResults': '没有找到匹配的项目'
+        },
+        'en': {
+            'subtitle': 'High-quality Java Open Source Projects',
+            'explore': 'Explore Excellent Java Open Source Projects',
+            'description': 'OpenQuartz provides simple, efficient, and reliable Java open source solutions',
+            'searchPlaceholder': 'Search projects...',
+            'projectList': 'Project List',
+            'copyright': '© 2023 OpenQuartz. All projects are based on their respective open source licenses.',
+            'noResults': 'No matching projects found'
+        }
+    };
 
     // 初始化显示所有项目
     displayProjects(projects);
@@ -14,6 +39,53 @@ document.addEventListener('DOMContentLoaded', function () {
             performSearch();
         }
     });
+
+    // 语言切换功能
+    languageToggle.addEventListener('click', function() {
+        languageSelector.classList.toggle('active');
+    });
+
+    // 点击其他地方关闭语言下拉菜单
+    document.addEventListener('click', function(event) {
+        if (!languageSelector.contains(event.target)) {
+            languageSelector.classList.remove('active');
+        }
+    });
+
+    // 语言选择
+    languageOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lang = this.getAttribute('data-lang');
+            changeLanguage(lang);
+            languageSelector.classList.remove('active');
+        });
+    });
+
+    // 切换语言
+    function changeLanguage(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        
+        // 更新所有带有 data-i18n 属性的元素
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        // 更新所有带有 data-i18n-placeholder 属性的元素
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-i18n-placeholder');
+            if (translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+
+        // 重新显示项目，使用正确的语言描述
+        displayProjects(projects);
+    }
 
     // 执行搜索
     function performSearch() {
@@ -42,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
         projectsContainer.innerHTML = '';
 
         if (projectsToDisplay.length === 0) {
-            projectsContainer.innerHTML = '<div class="no-results">没有找到匹配的项目</div>';
+            const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+            projectsContainer.innerHTML = `<div class="no-results">${translations[lang]['noResults']}</div>`;
             return;
         }
 
@@ -58,12 +131,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const card = document.createElement('div');
         card.className = 'project-card';
 
+        const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+        const description = lang === 'zh' ? project.description : project.descriptionEn;
+
         card.innerHTML = `
             <div class="project-content">
                 <h3 class="project-title">
                     <a href="${project.url}" target="_blank">${project.name}</a>
                 </h3>
-                <p class="project-description">${project.description}</p>
+                <p class="project-description">${description}</p>
                 <div class="project-meta">
                     <div class="project-stats">
                         <div class="project-stat">

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 获取DOM元素
     const projectsContainer = document.getElementById('projects-container');
     const searchInput = document.getElementById('search-input');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 搜索功能
     searchButton.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', function(event) {
+    searchInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             performSearch();
         }
@@ -18,20 +18,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // 执行搜索
     function performSearch() {
         const searchTerm = searchInput.value.toLowerCase().trim();
-        
+
         if (searchTerm === '') {
             displayProjects(projects);
             return;
         }
-        
+
         const filteredProjects = projects.filter(project => {
             return (
                 project.name.toLowerCase().includes(searchTerm) ||
                 project.description.toLowerCase().includes(searchTerm) ||
-                project.descriptionEn.toLowerCase().includes(searchTerm)
+                project.descriptionEn.toLowerCase().includes(searchTerm) ||
+                project.language.toLowerCase().includes(searchTerm)
             );
         });
-        
+
         displayProjects(filteredProjects);
     }
 
@@ -39,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayProjects(projectsToDisplay) {
         // 清空容器
         projectsContainer.innerHTML = '';
-        
+
         if (projectsToDisplay.length === 0) {
             projectsContainer.innerHTML = '<div class="no-results">没有找到匹配的项目</div>';
             return;
         }
-        
+
         // 为每个项目创建卡片
         projectsToDisplay.forEach(project => {
             const projectCard = createProjectCard(project);
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function createProjectCard(project) {
         const card = document.createElement('div');
         card.className = 'project-card';
-        
+
         card.innerHTML = `
             <div class="project-content">
                 <h3 class="project-title">
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
+
         return card;
     }
 });

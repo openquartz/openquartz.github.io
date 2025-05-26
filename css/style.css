@@ -44,14 +44,38 @@ header {
     text-align: center;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+header .logo {
+    height: 2.5rem; /* 与h1字体大小一致 */
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
 header h1 {
     font-size: 2.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 0; /* 移除底部边距，因为现在由.header-content控制 */
 }
 
 header .subtitle {
     font-size: 1.2rem;
     opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header .logo {
+        height: 2rem; /* 与小屏幕h1字体大小一致 */
+    }
 }
 
 /* 搜索区域样式 */

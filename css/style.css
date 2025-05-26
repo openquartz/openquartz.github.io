@@ -49,12 +49,14 @@ header {
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+    flex-wrap: nowrap; /* 防止内容换行 */
 }
 
 header .logo {
     height: 2.5rem; /* 与h1字体大小一致 */
     margin-right: 10px;
     vertical-align: middle;
+    flex-shrink: 0; /* 防止logo缩小 */
 }
 
 header h1 {
@@ -75,6 +77,11 @@ header .subtitle {
     
     header .logo {
         height: 2rem; /* 与小屏幕h1字体大小一致 */
+    }
+    
+    .header-content {
+        flex-direction: row; /* 确保在小屏幕上仍然保持水平排列 */
+        justify-content: center;
     }
 }
 

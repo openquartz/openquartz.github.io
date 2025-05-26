@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenQuartz - 开源项目展示</title>
-    <meta name="description" content="OpenQuartz开源组织的项目展示网站，提供高质量Java开源项目，包括文件导出、事件总线、分布式ID等解决方案。">
+    <meta name="description"
+          content="OpenQuartz开源组织的项目展示网站，提供高质量Java开源项目，包括文件导出、事件总线、分布式ID等解决方案。">
     <meta name="keywords" content="OpenQuartz, Java, 开源项目, 文件导出, 事件总线, 分布式ID, Spring Cloud">
     <meta name="author" content="OpenQuartz">
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -17,54 +18,61 @@
     <meta property="og:type" content="website">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>OpenQuartz</h1>
-            <p class="subtitle" data-i18n="subtitle">高质量Java开源项目集合</p>
-        </div>
-    </header>
+<header>
+    <div class="container">
+        <h1>OpenQuartz</h1>
+        <p class="subtitle" data-i18n="subtitle">高质量Java开源项目集合</p>
+    </div>
+</header>
 
-    <section class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <h2 data-i18n="explore">探索优秀的Java开源项目</h2>
-                <p data-i18n="description">OpenQuartz提供简洁、高效、可靠的Java开源解决方案</p>
-                <div class="search-box-container">
-                    <div class="search-box">
-                        <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="搜索项目...">
-                        <button id="search-button"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="language-selector">
-                        <button class="language-toggle">文 A</button>
-                        <div class="language-dropdown">
-                            <a href="#" data-lang="en">English</a>
-                            <a href="#" data-lang="zh">简体中文</a>
-                        </div>
+<section class="search-section">
+    <div class="container">
+        <div class="search-container">
+            <h2 data-i18n="explore">探索优秀的Java开源项目</h2>
+            <p data-i18n="description">OpenQuartz提供简洁、高效、可靠的Java开源解决方案</p>
+            <div class="search-box-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder"
+                           placeholder="搜索项目...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="language-selector">
+                    <button class="language-toggle">文 A</button>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="zh">简体中文</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="projects-section">
-        <div class="container">
-            <h2 data-i18n="projectList">项目列表</h2>
-            <div id="projects-container" class="projects-grid">
-                <!-- 项目卡片将通过JavaScript动态生成 -->
-            </div>
+<section class="projects-section">
+    <div class="container">
+        <h2 data-i18n="projectList">项目列表</h2>
+        <div id="projects-container" class="projects-grid">
+            <!-- 项目卡片将通过JavaScript动态生成 -->
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p data-i18n="copyright">&copy; 2023 OpenQuartz. 所有项目基于各自的开源协议。</p>
-            <p>
-                <a href="https://github.com/openquartz" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </p>
-        </div>
-    </footer>
+<footer>
+    <div class="container">
+        <p data-i18n="copyright">&copy; 2023 OpenQuartz. 所有项目基于各自的开源协议。</p>
+        <p>
+            <a href="https://github.com/openquartz" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://gitee.com/openquartz" target="_blank">
+                <svg class="gitee-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12,2C6.48,2,2,6.48,2,12c0,4.42,2.87,8.17,6.84,9.5.5.09,6.66.99,6.66.99V15h-4v-2h4v-1.5c0-4.08,2.8-6.32,6.5-6.32.72,0,1.41.1,2.05.27v3.83L18.34,9c-1.22,0-1.95.76-1.95,1.92V12h3.9l-.6,2h-3.3v7.5c3.97-1.33,6.5-5.08,6.5-9.5 C22,6.48,17.52,2,12,2z"/>
+                </svg>
+                Gitee
+            </a>
+        </p>
+    </div>
+</footer>
 
-    <script src="js/projects.js"></script>
-    <script src="js/main.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

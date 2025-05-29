@@ -56,8 +56,8 @@ const projects = [
     },
     {
         name: "spring-ai-jmanus-ollama",
-        description: "基于Ollama实现的Java 版的OpenManus",
-        descriptionEn: "OpenManus for Java based on Ollama's implementation",
+        description: "基于Spring AI + Ollama实现的Java 版的OpenManus",
+        descriptionEn: "OpenManus for Java based on Spring AI and Ollama",
         url: "https://github.com/openquartz/spring-ai-jmanus-ollama",
         language: "Java",
         stars: 2,

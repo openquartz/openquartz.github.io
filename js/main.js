@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // 初始化显示所有项目
-    displayProjects(projects);
+    fetchGitHubStats(projects).then(() => {
+        displayProjects(projects);
+    });
 
     // 搜索功能
     searchButton.addEventListener('click', performSearch);
@@ -106,6 +108,89 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         displayProjects(filteredProjects);
+    }
+
+    // 获取GitHub项目统计信息
+    async function fetchGitHubStats(projectsList) {
+        const CACHE_KEY = 'github_stats_cache';
+        const CACHE_EXPIRY = 10 * 60 * 1000; // 10分钟，单位毫秒
+        
+        // 尝试从缓存获取数据
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+            try {
+                const cache = JSON.parse(cachedData);
+                const now = new Date().getTime();
+                
+                // 检查缓存是否过期
+                if (cache.timestamp && (now - cache.timestamp) < CACHE_EXPIRY) {
+                    console.log('使用缓存的GitHub统计数据');
+                    
+                    // 将缓存的stars和forks数据应用到项目
+                    projectsList.forEach(project => {
+                        const cachedProject = cache.projects.find(p => p.name === project.name);
+                        if (cachedProject) {
+                            project.stars = cachedProject.stars;
+                            project.forks = cachedProject.forks;
+                        }
+                    });
+                    
+                    return projectsList;
+                }
+            } catch (error) {
+                console.error('解析缓存数据出错:', error);
+                // 缓存解析错误，继续获取新数据
+            }
+        }
+        
+        // 缓存不存在、已过期或解析错误，从GitHub API获取新数据
+        const promises = projectsList.map(async (project) => {
+            // 跳过没有GitHub URL的项目
+            if (!project.url || !project.url.includes('github.com')) {
+                return project;
+            }
+            
+            try {
+                // 从URL中提取owner和repo
+                const urlParts = project.url.split('github.com/');
+                if (urlParts.length < 2) return project;
+                
+                const repoPath = urlParts[1];
+                if (!repoPath) return project;
+                
+                // 调用GitHub API
+                const response = await fetch(`https://api.github.com/repos/${repoPath}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    // 更新stars和forks数据
+                    project.stars = data.stargazers_count;
+                    project.forks = data.forks_count;
+                }
+            } catch (error) {
+                console.error(`获取${project.name}统计信息出错:`, error);
+            }
+            return project;
+        });
+        
+        await Promise.all(promises);
+        
+        // 更新缓存
+        try {
+            const cacheData = {
+                timestamp: new Date().getTime(),
+                projects: projectsList.map(project => ({
+                    name: project.name,
+                    stars: project.stars,
+                    forks: project.forks
+                }))
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+            console.log('GitHub统计数据已缓存');
+        } catch (error) {
+            console.error('缓存GitHub统计数据出错:', error);
+        }
+        
+        return projectsList;
     }
 
     // 显示项目列表

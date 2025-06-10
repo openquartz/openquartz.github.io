@@ -91,12 +91,12 @@ const projects = [
         forks: 0
     },
     {
-        name: "mq-degrade（孵化中）",
+        name: "mq-degrade",
         description: "轻量级，低侵入MQ通用降级方案",
         descriptionEn: "Lightweight, low-intrusion MQ general degradation solution",
-        url: "https://github.com/openquartz/",
+        url: "https://github.com/openquartz/mq-degrade",
         language: "Java",
-        stars: 0,
+        stars: 1,
         forks: 0
     }
 

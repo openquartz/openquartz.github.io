@@ -92,8 +92,8 @@ const projects = [
     },
     {
         name: "mq-degrade",
-        description: "轻量级，低侵入MQ通用降级方案",
-        descriptionEn: "Lightweight, low-intrusion MQ general degradation solution",
+        description: "MQ通用降级方案(稳定性保障支持)、与主流配置中心接入。支持自动降级、手动降级等。",
+        descriptionEn: "MQ general degradation scheme (stability assurance support) and access to mainstream configuration centers. Support automatic downgrade, manual downgrade, etc.",
         url: "https://github.com/openquartz/mq-degrade",
         language: "Java",
         stars: 1,

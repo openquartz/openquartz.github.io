@@ -8,7 +8,7 @@ const projects = [
         language: "Java",
         stars: 16,
         forks: 4,
-        tags: ["文件处理", "导出", "框架"]
+        tags: ["大文件处理", "导出", "框架", "Excel"]
     },
     {
         name: "easy-event",
@@ -18,7 +18,7 @@ const projects = [
         language: "Java",
         stars: 24,
         forks: 9,
-        tags: ["事件总线", "分布式", "消息处理"]
+        tags: ["事件总线", "分布式", "消息处理", "DDD"]
     },
     {
         name: "spring-cloud-feign-plugin",
@@ -38,7 +38,7 @@ const projects = [
         language: "Java",
         stars: 5,
         forks: 1,
-        tags: ["分布式ID", "Spring Boot", "高性能"]
+        tags: ["分布式ID", "高性能"]
     },
     {
         name: "easy-transaction",
@@ -78,7 +78,7 @@ const projects = [
         language: "Java",
         stars: 2,
         forks: 1,
-        tags: ["状态机", "框架", "高性能"]
+        tags: ["状态机", "高性能"]
     },
     {
         name: "message-tools",
@@ -98,7 +98,7 @@ const projects = [
         language: "Java",
         stars: 1,
         forks: 0,
-        tags: ["对象比较", "工具类", "差异检测"]
+        tags: ["对象比较", "工具", "差异检测"]
     },
     {
         name: "mq-degrade",

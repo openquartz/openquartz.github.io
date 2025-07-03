@@ -357,6 +357,87 @@ footer a {
     display: block;
 }
 
+/* 标签样式 */
+.tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #f1f8ff;
+    color: #0366d6;
+    border-radius: 20px;
+    padding: 5px 12px;
+    margin: 5px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid #e1e4e8;
+}
+
+.tag:hover {
+    background-color: #dbeeff;
+}
+
+.tag.active {
+    background-color: #0366d6;
+    color: white;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.project-tag {
+    display: inline-block;
+    background-color: #f1f8ff;
+    color: #0366d6;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.75rem;
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.pagination-button {
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    color: #24292e;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination-button:hover {
+    background-color: #e1e4e8;
+}
+
+.pagination-button.active {
+    background-color: #0366d6;
+    color: white;
+    border-color: #0366d6;
+}
+
+.pagination-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* 响应式设计调整 */
 @media (max-width: 480px) {
     .search-box-container {
@@ -376,5 +457,14 @@ footer a {
     
     .language-toggle {
         width: 100%;
+    }
+    
+    .tag-filter {
+        justify-content: flex-start;
+    }
+    
+    .pagination-button {
+        padding: 6px 12px;
+        margin: 0 2px;
     }
 }

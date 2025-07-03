@@ -7,7 +7,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-file",
         language: "Java",
         stars: 16,
-        forks: 4
+        forks: 4,
+        tags: ["文件处理", "导出", "框架"]
     },
     {
         name: "easy-event",
@@ -16,7 +17,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-event",
         language: "Java",
         stars: 24,
-        forks: 9
+        forks: 9,
+        tags: ["事件总线", "分布式", "消息处理"]
     },
     {
         name: "spring-cloud-feign-plugin",
@@ -25,7 +27,8 @@ const projects = [
         url: "https://github.com/openquartz/spring-cloud-feign-plugin",
         language: "Java",
         stars: 6,
-        forks: 2
+        forks: 2,
+        tags: ["Spring Cloud", "Feign", "插件"]
     },
     {
         name: "easy-sequence",
@@ -34,7 +37,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-sequence",
         language: "Java",
         stars: 5,
-        forks: 1
+        forks: 1,
+        tags: ["分布式ID", "Spring Boot", "高性能"]
     },
     {
         name: "easy-transaction",
@@ -43,7 +47,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-transaction",
         language: "Java",
         stars: 2,
-        forks: 3
+        forks: 3,
+        tags: ["分布式事务", "TCC", "Saga"]
     },
     {
         name: "easy-biz-log",
@@ -52,7 +57,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-biz-log",
         language: "Java",
         stars: 5,
-        forks: 1
+        forks: 1,
+        tags: ["日志", "业务组件", "监控"]
     },
     {
         name: "spring-ai-jmanus-ollama",
@@ -61,7 +67,8 @@ const projects = [
         url: "https://github.com/openquartz/spring-ai-jmanus-ollama",
         language: "Java",
         stars: 2,
-        forks: 1
+        forks: 1,
+        tags: ["AI", "Spring AI", "Ollama"]
     },
     {
         name: "easy-statemachine",
@@ -70,7 +77,8 @@ const projects = [
         url: "https://github.com/openquartz/easy-statemachine",
         language: "Java",
         stars: 2,
-        forks: 1
+        forks: 1,
+        tags: ["状态机", "框架", "高性能"]
     },
     {
         name: "message-tools",
@@ -79,7 +87,8 @@ const projects = [
         url: "https://github.com/openquartz/message-tools",
         language: "Java",
         stars: 1,
-        forks: 0
+        forks: 0,
+        tags: ["消息处理", "工具", "稳定性"]
     },
     {
         name: "java-obj-diff",
@@ -88,7 +97,8 @@ const projects = [
         url: "https://github.com/openquartz/java-obj-diff",
         language: "Java",
         stars: 1,
-        forks: 0
+        forks: 0,
+        tags: ["对象比较", "工具类", "差异检测"]
     },
     {
         name: "mq-degrade",
@@ -97,7 +107,8 @@ const projects = [
         url: "https://github.com/openquartz/mq-degrade",
         language: "Java",
         stars: 1,
-        forks: 0
+        forks: 0,
+        tags: ["MQ", "降级", "稳定性"]
     }
 
 ];

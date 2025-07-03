@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const languageToggle = document.querySelector('.language-toggle');
     const languageSelector = document.querySelector('.language-selector');
     const languageOptions = document.querySelectorAll('.language-dropdown a');
+    const tagFilterContainer = document.getElementById('tag-filter');
+    const paginationContainer = document.getElementById('pagination');
+    
+    // 分页设置
+    let currentPage = 1;
+    const projectsPerPage = 6;
+    let filteredProjects = [];
+    
+    // 当前选中的标签
+    let selectedTags = [];
 
     // 语言翻译
     const translations = {
@@ -16,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
             'searchPlaceholder': '搜索项目...',
             'projectList': '项目列表',
             'copyright': '© 2023 OpenQuartz. 所有项目基于各自的开源协议。',
-            'noResults': '没有找到匹配的项目'
+            'noResults': '没有找到匹配的项目',
+            'allTags': '全部',
+            'prev': '上一页',
+            'next': '下一页'
         },
         'en': {
             'subtitle': 'High-quality Java Open Source Projects',
@@ -25,14 +38,88 @@ document.addEventListener('DOMContentLoaded', function () {
             'searchPlaceholder': 'Search projects...',
             'projectList': 'Project List',
             'copyright': '© 2023 OpenQuartz. All projects are based on their respective open source licenses.',
-            'noResults': 'No matching projects found'
+            'noResults': 'No matching projects found',
+            'allTags': 'All',
+            'prev': 'Previous',
+            'next': 'Next'
         }
     };
 
     // 初始化显示所有项目
     fetchGitHubStats(projects).then(() => {
-        displayProjects(projects);
+        filteredProjects = [...projects];
+        initTagFilter();
+        displayProjects(filteredProjects);
     });
+    
+    // 初始化标签过滤器
+    function initTagFilter() {
+        // 收集所有唯一标签
+        const allTags = new Set();
+        projects.forEach(project => {
+            if (project.tags && Array.isArray(project.tags)) {
+                project.tags.forEach(tag => allTags.add(tag));
+            }
+        });
+        
+        // 清空标签容器
+        tagFilterContainer.innerHTML = '';
+        
+        // 获取当前语言
+        const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+        
+        // 添加"全部"标签
+        const allTagElement = document.createElement('span');
+        allTagElement.className = 'tag active';
+        allTagElement.textContent = translations[lang]['allTags'];
+        allTagElement.setAttribute('data-tag', 'all');
+        allTagElement.addEventListener('click', () => filterByTag('all'));
+        tagFilterContainer.appendChild(allTagElement);
+        
+        // 添加其他标签
+        Array.from(allTags).sort().forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'tag';
+            tagElement.textContent = tag;
+            tagElement.setAttribute('data-tag', tag);
+            tagElement.addEventListener('click', () => filterByTag(tag));
+            tagFilterContainer.appendChild(tagElement);
+        });
+    }
+    
+    // 根据标签过滤项目
+    function filterByTag(tag) {
+        // 更新标签选中状态
+        document.querySelectorAll('.tag').forEach(tagElement => {
+            if (tag === 'all') {
+                tagElement.classList.toggle('active', tagElement.getAttribute('data-tag') === 'all');
+                selectedTags = [];
+            } else {
+                if (tagElement.getAttribute('data-tag') === 'all') {
+                    tagElement.classList.remove('active');
+                }
+                
+                if (tagElement.getAttribute('data-tag') === tag) {
+                    tagElement.classList.toggle('active');
+                    
+                    // 更新选中的标签列表
+                    if (tagElement.classList.contains('active')) {
+                        selectedTags.push(tag);
+                    } else {
+                        selectedTags = selectedTags.filter(t => t !== tag);
+                    }
+                }
+            }
+        });
+        
+        // 如果没有选中的标签，自动选中"全部"
+        if (selectedTags.length === 0) {
+            document.querySelector('.tag[data-tag="all"]').classList.add('active');
+        }
+        
+        // 过滤项目
+        filterProjects();
+    }
 
     // 搜索功能
     searchButton.addEventListener('click', performSearch);
@@ -84,29 +171,52 @@ document.addEventListener('DOMContentLoaded', function () {
                 element.placeholder = translations[lang][key];
             }
         });
+        
+        // 重置到第一页
+        currentPage = 1;
+        
+        // 更新标签过滤器
+        initTagFilter();
 
         // 重新显示项目，使用正确的语言描述
-        displayProjects(projects);
+        displayProjects(filteredProjects);
     }
 
     // 执行搜索
     function performSearch() {
         const searchTerm = searchInput.value.toLowerCase().trim();
-
-        if (searchTerm === '') {
-            displayProjects(projects);
-            return;
+        filterProjects(searchTerm);
+    }
+    
+    // 过滤项目（结合搜索词和标签）
+    function filterProjects(searchTerm = null) {
+        // 如果没有提供搜索词，使用当前输入框的值
+        if (searchTerm === null) {
+            searchTerm = searchInput.value.toLowerCase().trim();
         }
-
-        const filteredProjects = projects.filter(project => {
-            return (
+        
+        // 重置到第一页
+        currentPage = 1;
+        
+        // 根据搜索词和标签过滤项目
+        filteredProjects = projects.filter(project => {
+            // 搜索词过滤
+            const matchesSearch = searchTerm === '' || (
                 project.name.toLowerCase().includes(searchTerm) ||
                 project.description.toLowerCase().includes(searchTerm) ||
                 project.descriptionEn.toLowerCase().includes(searchTerm) ||
-                project.language.toLowerCase().includes(searchTerm)
+                project.language.toLowerCase().includes(searchTerm) ||
+                (project.tags && project.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
             );
+            
+            // 标签过滤
+            const matchesTags = selectedTags.length === 0 || 
+                (project.tags && selectedTags.every(tag => project.tags.includes(tag)));
+            
+            return matchesSearch && matchesTags;
         });
-
+        
+        // 显示过滤后的项目
         displayProjects(filteredProjects);
     }
 
@@ -193,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return projectsList;
     }
 
-    // 显示项目列表
+    // 显示项目列表（带分页）
     function displayProjects(projectsToDisplay) {
         // 清空容器
         projectsContainer.innerHTML = '';
@@ -201,14 +311,82 @@ document.addEventListener('DOMContentLoaded', function () {
         if (projectsToDisplay.length === 0) {
             const lang = document.documentElement.getAttribute('data-lang') || 'zh';
             projectsContainer.innerHTML = `<div class="no-results">${translations[lang]['noResults']}</div>`;
+            paginationContainer.innerHTML = '';
             return;
         }
-
-        // 为每个项目创建卡片
-        projectsToDisplay.forEach(project => {
-            const projectCard = createProjectCard(project);
+        
+        // 计算分页
+        const totalPages = Math.ceil(projectsToDisplay.length / projectsPerPage);
+        const startIndex = (currentPage - 1) * projectsPerPage;
+        const endIndex = Math.min(startIndex + projectsPerPage, projectsToDisplay.length);
+        
+        // 显示当前页的项目
+        for (let i = startIndex; i < endIndex; i++) {
+            const projectCard = createProjectCard(projectsToDisplay[i]);
             projectsContainer.appendChild(projectCard);
+        }
+        
+        // 更新分页控制
+        updatePagination(totalPages);
+    }
+    
+    // 更新分页控制
+    function updatePagination(totalPages) {
+        paginationContainer.innerHTML = '';
+        
+        if (totalPages <= 1) {
+            return;
+        }
+        
+        // 获取当前语言
+        const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+        
+        // 添加上一页按钮
+        const prevButton = document.createElement('button');
+        prevButton.className = `pagination-button ${currentPage === 1 ? 'disabled' : ''}`;
+        prevButton.innerHTML = '&laquo;';
+        prevButton.title = translations[lang]['prev'];
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayProjects(filteredProjects);
+            }
         });
+        paginationContainer.appendChild(prevButton);
+        
+        // 添加页码按钮
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        // 调整起始页，确保显示足够的页码
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `pagination-button ${i === currentPage ? 'active' : ''}`;
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                displayProjects(filteredProjects);
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+        
+        // 添加下一页按钮
+        const nextButton = document.createElement('button');
+        nextButton.className = `pagination-button ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextButton.innerHTML = '&raquo;';
+        nextButton.title = translations[lang]['next'];
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayProjects(filteredProjects);
+            }
+        });
+        paginationContainer.appendChild(nextButton);
     }
 
     // 创建项目卡片
@@ -218,6 +396,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const lang = document.documentElement.getAttribute('data-lang') || 'zh';
         const description = lang === 'zh' ? project.description : project.descriptionEn;
+        
+        // 生成标签HTML
+        let tagsHtml = '';
+        if (project.tags && project.tags.length > 0) {
+            tagsHtml = '<div class="project-tags">';
+            project.tags.forEach(tag => {
+                tagsHtml += `<span class="project-tag">${tag}</span>`;
+            });
+            tagsHtml += '</div>';
+        }
 
         card.innerHTML = `
             <div class="project-content">
@@ -225,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <a href="${project.url}" target="_blank">${project.name}</a>
                 </h3>
                 <p class="project-description">${description}</p>
+                ${tagsHtml}
                 <div class="project-meta">
                     <div class="project-stats">
                         <div class="project-stat">

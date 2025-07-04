@@ -58,7 +58,7 @@ const projects = [
         language: "Java",
         stars: 5,
         forks: 1,
-        tags: ["日志", "业务组件", "监控"]
+        tags: ["操作日志", "业务组件"]
     },
     {
         name: "spring-ai-jmanus-ollama",

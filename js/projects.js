@@ -28,7 +28,7 @@ const projects = [
         language: "Java",
         stars: 6,
         forks: 2,
-        tags: ["Spring Cloud", "Feign", "插件"]
+        tags: ["Spring Cloud", "Feign", "动态超时"]
     },
     {
         name: "easy-sequence",

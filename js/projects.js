@@ -31,16 +31,6 @@ const projects = [
         tags: ["Spring Cloud", "Feign", "动态超时"]
     },
     {
-        name: "easy-sequence",
-        description: "小巧的，优雅的，易用的，集成多种高性能分布式ID实现SpringBootStarter包",
-        descriptionEn: "Compact, elegant, easy-to-use, integrating multiple high-performance distributed IDs to implement the SpringBootStarter package",
-        url: "https://github.com/openquartz/easy-sequence",
-        language: "Java",
-        stars: 5,
-        forks: 1,
-        tags: ["分布式ID", "高性能"]
-    },
-    {
         name: "easy-transaction",
         description: "轻量级最大努力重试型TCC、Saga分布式柔性事务解决方案",
         descriptionEn: "Lightweight best-effort retry TCC, Saga distributed flexible transaction solution",

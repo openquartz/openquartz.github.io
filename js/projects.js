@@ -99,6 +99,16 @@ const projects = [
         stars: 1,
         forks: 0,
         tags: ["MQ", "降级", "稳定性"]
+    },
+    {
+        name: "easy-indicator-rule",
+        description: "一个面向 Spring Boot 业务系统的指标规则组件：用代码定义指标元数据，用页面管理规则，用运行时执行真实业务对象上的规则",
+        descriptionEn: "An indicator rule component for Spring Boot business systems: define indicator metadata in code, manage rules via UI, execute rules against real business objects at runtime",
+        url: "https://github.com/openquartz/easy-indicator-rule",
+        language: "Java",
+        stars: 0,
+        forks: 0,
+        tags: ["指标规则", "Spring Boot", "规则引擎", "QLExpress"]
     }
 
 ];

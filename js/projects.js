@@ -109,6 +109,16 @@ const projects = [
         stars: 0,
         forks: 0,
         tags: ["指标规则", "Spring Boot", "规则引擎", "QLExpress"]
+    },
+    {
+        name: "easy-data-archive",
+        description: "企业级 MySQL 数据归档与迁移平台，支持按时间和 ID 双策略归档、Web 控制台管理、RBAC 细粒度权限控制和实时任务监控",
+        descriptionEn: "Enterprise-grade MySQL data archiving and migration platform with dual-strategy archiving (time & ID), web console management, RBAC fine-grained access control, and real-time task monitoring",
+        url: "https://github.com/openquartz/easy-data-archive",
+        language: "Java",
+        stars: 0,
+        forks: 0,
+        tags: ["数据归档", "MySQL", "Spring Boot", "Vue 3", "企业级"]
     }
 
 ];
